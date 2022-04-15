@@ -66,8 +66,9 @@ export class AppComponent {
   }
 
   public async GetItemPrice(amount: string, item: string) {
+    console.log(item.trim().split(' ').join('-'))
     this.resultList = [];
-    axios.get<ItemPriceResult>(this.wowBaseUrl + '/' + item.trim().replace(' ', '-') + '/prices').then((res) => {
+    axios.get<ItemPriceResult>(this.wowBaseUrl + '/' + item.trim().split(' ').join('-') + '/prices').then((res) => {
       if (res.data.data) {
         res.data.data[0].marketValue = res.data.data[0].marketValue * Number(amount);
         res.data.data[res.data.data.length-1].marketValue = res.data.data[res.data.data.length-1].marketValue * Number(amount);
