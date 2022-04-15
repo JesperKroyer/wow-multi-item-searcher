@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background: linear-gradient(#212124, #151517);
+    background: -webkit-linear-gradient(
+        left,
+        #212124 0%,
+        #151517 5%,
+        #212124 10%,
+        #151517 15%,
+        #212124 20%,
+        #212124 25%,
+        #151517 30%,
+        #212124 35%,
+        #151517 40%,
+        #212124 45%,
+        #151517 50%,
+        #212124 55%,
+        #151517 60%,
+        #212124 65%,
+        #151517 70%,
+        #212124 75%,
+        #151517 80%,
+        #212124 85%,
+        #151517 90%,
+        #212124 95%,
+        #151517 100%
+    );
+}
+
+html, 
+body {
+    height: 100%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
