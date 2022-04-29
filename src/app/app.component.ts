@@ -3,8 +3,6 @@ import axios from 'axios';
 import Nexus from 'nexushub-client';
 import { ItemPriceResult } from './interfaces/itemPriceResult.interface';
 
-declare var require: any
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -50,6 +48,10 @@ export class AppComponent {
 
   }
   public async Calculate() {
+    this.resultList = [];
+    this.totalCosts = 0;
+    this.totalLastWeek = 0;
+    this.totalCostsChange = 0;
     let splitString = this.itemList.split('\n');
     for (let index = 0; index < splitString.length; index++) {
       const element = splitString[index].trim();
@@ -66,16 +68,20 @@ export class AppComponent {
   }
 
   public async GetItemPrice(amount: string, item: string) {
-    console.log(item.trim().split(' ').join('-'))
-    this.resultList = [];
-    axios.get<ItemPriceResult>(this.wowBaseUrl + '/' + item.trim().split(' ').join('-') + '/prices').then((res) => {
-      if (res.data.data) {
-        res.data.data[0].marketValue = res.data.data[0].marketValue * Number(amount);
-        res.data.data[res.data.data.length-1].marketValue = res.data.data[res.data.data.length-1].marketValue * Number(amount);
-        this.TotalCosts(res.data)
-        this.resultList.push(res.data)
-      }
-    })
+    if(item) {
+      axios.get<ItemPriceResult>(this.wowBaseUrl + '/' + item.trim().split(' ').join('-') + '/prices').then((res) => {
+        if (res.data.data) {
+          res.data.data[0].originalMarkValue = res.data.data[0].marketValue;
+          res.data.quantity = +amount;
+          res.data.data[0].marketValue = res.data.data[0].marketValue * Number(amount);
+          res.data.data[res.data.data.length-1].originalMarkValue = res.data.data[res.data.data.length-1].marketValue;
+          res.data.data[res.data.data.length-1].marketValue = res.data.data[res.data.data.length-1].marketValue * Number(amount);
+          this.TotalCosts(res.data)
+          this.resultList.push(res.data)
+          console.log(this.resultList)
+        }
+      })
+    }
   }
 
   public Delay(ms: number) {
@@ -86,5 +92,6 @@ export class AppComponent {
     this.totalCosts += result.data[0].marketValue;
     this.totalLastWeek += result.data[result.data.length-1].marketValue;
     this.totalCostsChange = this.totalCosts - this.totalLastWeek;
+    console.log(this.totalCosts)
   }
 }

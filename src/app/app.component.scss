@@ -41,3 +41,7 @@ h3 {
 .padding-left {
     padding-left: calc(var(--bs-gutter-x) * .5);
 }
+
+::ng-deep .mat-divider {
+    border-color: white;
+}

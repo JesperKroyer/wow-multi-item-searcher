@@ -4,7 +4,8 @@ export interface ItemPriceResult {
   name: String,
   uniqueName: String,
   timerange: Number,
-  data: ItemData[]
+  data: ItemData[],
+  quantity: number,
 }
 
 export interface ItemData {
@@ -12,4 +13,5 @@ export interface ItemData {
   minBuyout: number,
   quantity: number,
   scannedAt: Date,
+  originalMarkValue: number,
 }

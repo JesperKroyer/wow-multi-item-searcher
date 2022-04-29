@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDividerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { Axios } from 'axios';
 
 @NgModule({
   declarations: [
@@ -18,6 +17,7 @@ import { Axios } from 'axios';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
