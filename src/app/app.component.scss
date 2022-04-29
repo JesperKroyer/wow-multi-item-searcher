@@ -2,7 +2,7 @@ textarea {
     color: white;
     background: rgba(8, 8, 10, 0.55);
     width: 100%;
-    height: 80%;
+    height: 100%;
 }
 
 h3 {
@@ -10,7 +10,7 @@ h3 {
 }
 
 .max-height {
-    height: 90%;
+    height: 79%;
 }
 
 .Body {
@@ -19,10 +19,7 @@ h3 {
 }
 
 .calculate-button {
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
+    width: 100%;
 }
 
 .calculate-col {
@@ -44,4 +41,37 @@ h3 {
 
 ::ng-deep .mat-divider {
     border-color: white;
+}
+
+.selector {
+    .mat-input-element::placeholder{
+        color: rgba(255, 255, 255, 0.486);
+     }
+     
+    ::ng-deep .mat-form-field-label {
+        color: white;
+    }
+
+    color: white;
+    width: 100%;
+}
+
+::ng-deep .mat-form-field-ripple{
+    background-color: white !important;
+}
+
+.select-alliance {
+    ::ng-deep .mat-select-value-text {
+        color: #004e99;
+    }
+}
+
+.select-horde {
+    ::ng-deep .mat-select-value-text {
+        color: #8c1616;
+    }
+}
+
+::ng-deep .mat-checkbox-background {
+    background-color: #673ab7 !important;
 }

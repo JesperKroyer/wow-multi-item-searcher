@@ -194,7 +194,32 @@
     </div>
   </div>
   <div class="row">
-    <button class="col-sm-5" mat-raised-button color="primary"
+    <div class="col-sm-5">
+      <button class="calculate-button" mat-raised-button color="primary"
       (click)="Calculate()">Search!</button>
+    </div>
+  </div>
+  <div class="row">
+    <mat-checkbox class="col-sm-5" [(ngModel)]="advancedSettings">Advance Settings</mat-checkbox>
+  </div>
+  <div class="row" *ngIf="advancedSettings">
+    <form class="col-sm-5" [formGroup]="realmAndFaction">
+      <mat-form-field class="selector" appearance="fill">
+        <mat-label>Realm</mat-label>
+        <input matInput placeholder="Pyrewood Village (Leave Empty if you're on Pyrewood)" formControlName="realm">
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="row" *ngIf="advancedSettings">
+    <form class="col-sm-5" [formGroup]="realmAndFaction">
+      <mat-form-field class="selector" appearance="fill" [class.select-alliance]="realmAndFaction.get('faction').value === 'Alliance'" [class.select-horde]="realmAndFaction.get('faction').value === 'Horde'">
+        <mat-label>Faction</mat-label>
+        <mat-select formControlName="faction" >
+          <mat-option *ngFor="let faction of factions" [value]="faction.value">
+            {{faction.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </div>
 </div>

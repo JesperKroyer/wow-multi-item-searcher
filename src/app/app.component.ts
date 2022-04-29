@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import axios from 'axios';
 import Nexus from 'nexushub-client';
 import { ItemPriceResult } from './interfaces/itemPriceResult.interface';
@@ -11,13 +12,20 @@ import { ItemPriceResult } from './interfaces/itemPriceResult.interface';
 
 export class AppComponent {
   public authBaseUrl = 'https://auth.nexushub.co';
-  public wowBaseUrl = 'https://api.nexushub.co/wow-classic/v1/items/pyrewood-village-alliance';
+  //https://api.nexushub.co/wow-classic/v1/items/pyrewood-village-alliance
+  public wowBaseUrl = 'https://api.nexushub.co/wow-classic/v1/items/';
   public accessToken = '';
   public resultList: ItemPriceResult[] = [];
   public totalCosts: number = 0;
   public totalLastWeek: number = 0;
   public totalCostsChange: number = 0;
   public activated: boolean = false;
+  public factions = [{ value: 'Alliance' }, { value: 'Horde' }];
+  public realmAndFaction = new FormGroup({
+    realm: new FormControl(''),
+    faction: new FormControl('Alliance'),
+  });
+  public advancedSettings = false;
 
   title = 'wow-multi-item-searcher';
 
@@ -68,19 +76,27 @@ export class AppComponent {
   }
 
   public async GetItemPrice(amount: string, item: string) {
-    if(item) {
-      axios.get<ItemPriceResult>(this.wowBaseUrl + '/' + item.trim().split(' ').join('-') + '/prices').then((res) => {
-        if (res.data.data) {
-          res.data.data[0].originalMarkValue = res.data.data[0].marketValue;
-          res.data.quantity = +amount;
-          res.data.data[0].marketValue = res.data.data[0].marketValue * Number(amount);
-          res.data.data[res.data.data.length-1].originalMarkValue = res.data.data[res.data.data.length-1].marketValue;
-          res.data.data[res.data.data.length-1].marketValue = res.data.data[res.data.data.length-1].marketValue * Number(amount);
-          this.TotalCosts(res.data)
-          this.resultList.push(res.data)
-          console.log(this.resultList)
-        }
-      })
+    let realm = 'pyrewood-village';
+    if (this.realmAndFaction.get('realm').value) {
+      realm = this.realmAndFaction.get('realm').value.trim().split(' ').join('-').toLowerCase();
+    }
+    if (item) {
+      axios.get<ItemPriceResult>(
+        this.wowBaseUrl + realm + '-' +
+        this.realmAndFaction.get('faction').value.trim().toLowerCase() +
+        '/' +
+        item.trim().split(' ').join('-') + '/prices').then((res) => {
+          if (res.data.data) {
+            res.data.data[0].originalMarkValue = res.data.data[0].marketValue;
+            res.data.quantity = +amount;
+            res.data.data[0].marketValue = res.data.data[0].marketValue * Number(amount);
+            res.data.data[res.data.data.length - 1].originalMarkValue = res.data.data[res.data.data.length - 1].marketValue;
+            res.data.data[res.data.data.length - 1].marketValue = res.data.data[res.data.data.length - 1].marketValue * Number(amount);
+            this.TotalCosts(res.data)
+            this.resultList.push(res.data)
+            console.log(this.resultList)
+          }
+        })
     }
   }
 
@@ -90,7 +106,7 @@ export class AppComponent {
 
   public TotalCosts(result: ItemPriceResult) {
     this.totalCosts += result.data[0].marketValue;
-    this.totalLastWeek += result.data[result.data.length-1].marketValue;
+    this.totalLastWeek += result.data[result.data.length - 1].marketValue;
     this.totalCostsChange = this.totalCosts - this.totalLastWeek;
     console.log(this.totalCosts)
   }

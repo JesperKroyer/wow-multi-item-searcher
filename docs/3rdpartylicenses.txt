@@ -87,7 +87,15 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/checkbox
+
+@angular/material/core
+
 @angular/material/divider
+
+@angular/material/form-field
+
+@angular/material/select
 
 @angular/platform-browser
 MIT
