@@ -94,7 +94,6 @@ export class AppComponent {
             res.data.data[res.data.data.length - 1].marketValue = res.data.data[res.data.data.length - 1].marketValue * Number(amount);
             this.TotalCosts(res.data)
             this.resultList.push(res.data)
-            console.log(this.resultList)
           }
         })
     }
@@ -108,6 +107,5 @@ export class AppComponent {
     this.totalCosts += result.data[0].marketValue;
     this.totalLastWeek += result.data[result.data.length - 1].marketValue;
     this.totalCostsChange = this.totalCosts - this.totalLastWeek;
-    console.log(this.totalCosts)
   }
 }
