@@ -28,34 +28,6 @@
             {{item?.quantity}}x {{item?.name}}
           </div>
           <div class="col-sm-3">
-            <div *ngIf="item.data[0].marketValue.toString().length >= 5">
-              {{item.data[0].marketValue.toString().substring(0,item.data[0].marketValue.toString().length-4)}}G
-              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-4,item.data[0].marketValue.toString().length-2)}}S
-              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
-            </div>
-            <div
-              *ngIf="item.data[0].marketValue.toString().length >= 3 && item.data[0].marketValue.toString().length < 5">
-              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-4,item.data[0].marketValue.toString().length-2)}}S
-              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
-            </div>
-            <div *ngIf="item.data[0].marketValue.toString().length <= 2">
-              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
-            </div>
-            <div *ngIf="item.data[0].originalMarkValue.toString().length >= 5">
-              ({{item.data[0].originalMarkValue.toString().substring(0,item.data[0].originalMarkValue.toString().length-4)}}G
-              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-4,item.data[0].originalMarkValue.toString().length-2)}}S
-              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
-            </div>
-            <div
-              *ngIf="item.data[0].originalMarkValue.toString().length >= 3 && item.data[0].originalMarkValue.toString().length < 5">
-              ({{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-4,item.data[0].originalMarkValue.toString().length-2)}}S
-              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
-            </div>
-            <div *ngIf="item.data[0].originalMarkValue.toString().length <= 2">
-              ({{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
-            </div>
-          </div>
-          <div class="col-sm-4">
             <div *ngIf="item.data[item.data.length-1].marketValue.toString().length >= 5">
               {{item.data[item.data.length-1].marketValue.toString().substring(0,item.data[item.data.length-1].marketValue.toString().length-4)}}G
               {{item.data[item.data.length-1].marketValue.toString().substring(item.data[item.data.length-1].marketValue.toString().length-4,item.data[item.data.length-1].marketValue.toString().length-2)}}S
@@ -83,32 +55,60 @@
               ({{item.data[item.data.length-1].originalMarkValue.toString().substring(item.data[item.data.length-1].originalMarkValue.toString().length-2,item.data[item.data.length-1].originalMarkValue.toString().length)}}C)
             </div>
           </div>
+          <div class="col-sm-4">
+            <div *ngIf="item.data[0].marketValue.toString().length >= 5">
+              {{item.data[0].marketValue.toString().substring(0,item.data[0].marketValue.toString().length-4)}}G
+              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-4,item.data[0].marketValue.toString().length-2)}}S
+              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
+            </div>
+            <div
+              *ngIf="item.data[0].marketValue.toString().length >= 3 && item.data[0].marketValue.toString().length < 5">
+              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-4,item.data[0].marketValue.toString().length-2)}}S
+              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
+            </div>
+            <div *ngIf="item.data[0].marketValue.toString().length <= 2">
+              {{item.data[0].marketValue.toString().substring(item.data[0].marketValue.toString().length-2,item.data[0].marketValue.toString().length)}}C
+            </div>
+            <div *ngIf="item.data[0].originalMarkValue.toString().length >= 5">
+              ({{item.data[0].originalMarkValue.toString().substring(0,item.data[0].originalMarkValue.toString().length-4)}}G
+              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-4,item.data[0].originalMarkValue.toString().length-2)}}S
+              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
+            </div>
+            <div
+              *ngIf="item.data[0].originalMarkValue.toString().length >= 3 && item.data[0].originalMarkValue.toString().length < 5">
+              ({{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-4,item.data[0].originalMarkValue.toString().length-2)}}S
+              {{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
+            </div>
+            <div *ngIf="item.data[0].originalMarkValue.toString().length <= 2">
+              ({{item.data[0].originalMarkValue.toString().substring(item.data[0].originalMarkValue.toString().length-2,item.data[0].originalMarkValue.toString().length)}}C)
+            </div>
+        </div>
           <div class="col-sm-2">
             <div
-              *ngIf="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length >= 5"
-              [class.positive-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] !== '-'"
-              [class.negative-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] === '-'">
+              *ngIf="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length >= 5"
+              [class.positive-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] !== '-'"
+              [class.negative-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] === '-'">
               <div class="row padding-left">
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring(0,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-4)}}G
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring((item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-4,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-2)}}S
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring((item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-2,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length)}}C
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring(0,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-4)}}G
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring((item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-4,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-2)}}S
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring((item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-2,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length)}}C
               </div>
             </div>
             <div
-              *ngIf="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length >= 3 && (item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length < 5"
-              [class.positive-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] !== '-'"
-              [class.negative-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] === '-'">
+              *ngIf="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length >= 3 && (item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length < 5"
+              [class.positive-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] !== '-'"
+              [class.negative-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] === '-'">
               <div class="row padding-left">
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring((item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-4,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-2)}}S
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring((item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-2,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length)}}C
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring((item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-4,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-2)}}S
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring((item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-2,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length)}}C
               </div>
             </div>
             <div
-              *ngIf="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length <= 2"
-              [class.positive-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] !== '-'"
-              [class.negative-change]="(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString()[0] === '-'">
+              *ngIf="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length <= 2"
+              [class.positive-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] !== '-'"
+              [class.negative-change]="(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString()[0] === '-'">
               <div class="row padding-left">
-                {{(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').substring((item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length-2,(item.data[0].marketValue-item.data[item.data.length-1].marketValue).toString().replace('-','').length)}}C
+                {{(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').substring((item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length-2,(item.data[item.data.length-1].marketValue-item.data[0].marketValue).toString().replace('-','').length)}}C
               </div>
             </div>
           </div>

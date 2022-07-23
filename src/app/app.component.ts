@@ -104,8 +104,8 @@ export class AppComponent {
   }
 
   public TotalCosts(result: ItemPriceResult) {
-    this.totalCosts += result.data[0].marketValue;
-    this.totalLastWeek += result.data[result.data.length - 1].marketValue;
+    this.totalCosts += result.data[result.data.length - 1].marketValue;
+    this.totalLastWeek += result.data[0].marketValue;
     this.totalCostsChange = this.totalCosts - this.totalLastWeek;
   }
 }
