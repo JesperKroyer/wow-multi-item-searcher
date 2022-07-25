@@ -63,7 +63,8 @@ export class AppComponent {
     let splitString = this.itemList.split('\n');
     for (let index = 0; index < splitString.length; index++) {
       const element = splitString[index].trim();
-      const splitElement = element.split('x');
+      const splitElement = [element.substring(0, element.indexOf('x')), element.substring(element.indexOf('x') + 1)]
+      console.log(splitElement)
       if (index % 20 === 0 && index > 0) {
         await this.Delay(5000);
         await this.GetItemPrice(splitElement[0], splitElement[1])
